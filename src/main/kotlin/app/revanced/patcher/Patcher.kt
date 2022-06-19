@@ -51,6 +51,8 @@ class Patcher(private val options: PatcherOptions) {
         if (outDir.exists()) outDir.deleteRecursively()
         outDir.mkdirs()
 
+        // TODO: reduce code duplication
+
         val androlib = Androlib(BuildOptions().also { it.setBuildOptions(options) })
         val resourceTable = androlib.getResTable(extInputFile, true)
 
@@ -293,6 +295,11 @@ class Patcher(private val options: PatcherOptions) {
                 if (stopOnError && result.isError()) break
             }
         }
+    }
+
+    private fun unpackSplits(outDir: File) {
+        val splits = options.splits.map { ExtFile(it) }
+
     }
 }
 

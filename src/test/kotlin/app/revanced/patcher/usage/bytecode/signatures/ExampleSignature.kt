@@ -13,7 +13,7 @@ import org.jf.dexlib2.Opcode
 @Name("example-signature")
 @MatchingMethod(
     "LexampleClass;",
-    "exampleMehod"
+    "exampleMethod"
 )
 @FuzzyPatternScanMethod(2)
 @ExampleBytecodeCompatibility
