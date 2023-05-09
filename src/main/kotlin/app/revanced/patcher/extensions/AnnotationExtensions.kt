@@ -1,20 +1,25 @@
 package app.revanced.patcher.extensions
 
-import app.revanced.patcher.annotation.Compatibility
-import app.revanced.patcher.annotation.Description
-import app.revanced.patcher.annotation.Name
-import app.revanced.patcher.annotation.Version
-import app.revanced.patcher.data.Data
+import app.revanced.patcher.annotation.*
+import app.revanced.patcher.data.Context
+import app.revanced.patcher.fingerprint.method.annotation.FuzzyPatternScanMethod
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
+import app.revanced.patcher.patch.OptionsContainer
 import app.revanced.patcher.patch.Patch
+import app.revanced.patcher.patch.PatchOptions
+import app.revanced.patcher.patch.annotations.DependsOn
+import app.revanced.patcher.patch.annotations.RequiresIntegrations
 import kotlin.reflect.KClass
+import kotlin.reflect.KVisibility
+import kotlin.reflect.full.companionObject
+import kotlin.reflect.full.companionObjectInstance
 
 /**
  * Recursively find a given annotation on a class.
  * @param targetAnnotation The annotation to find.
  * @return The annotation.
  */
-private fun <T : Annotation> Class<*>.recursiveAnnotation(targetAnnotation: KClass<T>) =
+private fun <T : Annotation> Class<*>.findAnnotationRecursively(targetAnnotation: KClass<T>) =
     this.findAnnotationRecursively(targetAnnotation.java, mutableSetOf())
 
 
@@ -36,28 +41,43 @@ private fun <T : Annotation> Class<*>.findAnnotationRecursively(
 }
 
 object PatchExtensions {
-    val Class<out Patch<Data>>.patchName: String
-        get() = recursiveAnnotation(Name::class)?.name ?: this.javaClass.simpleName
-    val Class<out Patch<Data>>.version get() = recursiveAnnotation(Version::class)?.version
-    val Class<out Patch<Data>>.include get() = recursiveAnnotation(app.revanced.patcher.patch.annotations.Patch::class)!!.include
-    val Class<out Patch<Data>>.description get() = recursiveAnnotation(Description::class)?.description
-    val Class<out Patch<Data>>.dependencies get() = recursiveAnnotation(app.revanced.patcher.patch.annotations.DependsOn::class)?.dependencies
-    val Class<out Patch<Data>>.compatiblePackages get() = recursiveAnnotation(Compatibility::class)?.compatiblePackages
+    val Class<out Patch<Context>>.patchName: String
+        get() = findAnnotationRecursively(Name::class)?.name ?: this.simpleName
 
-    @JvmStatic
-    fun Class<out Patch<Data>>.dependsOn(patch: Class<out Patch<Data>>): Boolean {
-        if (this.patchName == patch.patchName) throw IllegalArgumentException("thisval and patch may not be the same")
-        return this.dependencies?.any { it.java.patchName == this@dependsOn.patchName } == true
-    }
+    val Class<out Patch<Context>>.version
+        get() = findAnnotationRecursively(Version::class)?.version
+
+    val Class<out Patch<Context>>.include
+        get() = findAnnotationRecursively(app.revanced.patcher.patch.annotations.Patch::class)!!.include
+
+    val Class<out Patch<Context>>.description
+        get() = findAnnotationRecursively(Description::class)?.description
+
+    val Class<out Patch<Context>>.dependencies
+        get() = findAnnotationRecursively(DependsOn::class)?.dependencies
+
+    val Class<out Patch<Context>>.compatiblePackages
+        get() = findAnnotationRecursively(Compatibility::class)?.compatiblePackages
+
+    internal val Class<out Patch<Context>>.requiresIntegrations
+        get() = findAnnotationRecursively(RequiresIntegrations::class) != null
+
+    val Class<out Patch<Context>>.options: PatchOptions?
+        get() = kotlin.companionObject?.let { cl ->
+            if (cl.visibility != KVisibility.PUBLIC) return null
+            kotlin.companionObjectInstance?.let {
+                (it as? OptionsContainer)?.options
+            }
+        }
 }
 
 object MethodFingerprintExtensions {
     val MethodFingerprint.name: String
-        get() = javaClass.recursiveAnnotation(Name::class)?.name ?: this.javaClass.simpleName
-    val MethodFingerprint.version get() = javaClass.recursiveAnnotation(Version::class)?.version ?: "0.0.1"
-    val MethodFingerprint.description get() = javaClass.recursiveAnnotation(Description::class)?.description
-    val MethodFingerprint.compatiblePackages get() = javaClass.recursiveAnnotation(Compatibility::class)?.compatiblePackages
-    val MethodFingerprint.matchingMethod get() = javaClass.recursiveAnnotation(app.revanced.patcher.fingerprint.method.annotation.MatchingMethod::class)
-    val MethodFingerprint.fuzzyPatternScanMethod get() = javaClass.recursiveAnnotation(app.revanced.patcher.fingerprint.method.annotation.FuzzyPatternScanMethod::class)
-    val MethodFingerprint.fuzzyScanThreshold get() = fuzzyPatternScanMethod?.threshold ?: 0
+        get() = this.javaClass.simpleName
+
+    val MethodFingerprint.fuzzyPatternScanMethod
+        get() = javaClass.findAnnotationRecursively(FuzzyPatternScanMethod::class)
+
+    val MethodFingerprint.fuzzyScanThreshold
+        get() = fuzzyPatternScanMethod?.threshold ?: 0
 }

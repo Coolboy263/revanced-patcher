@@ -3,18 +3,15 @@ package app.revanced.patcher.usage.bytecode
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.annotation.Version
-import app.revanced.patcher.data.impl.BytecodeData
+import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.addInstructions
 import app.revanced.patcher.extensions.or
 import app.revanced.patcher.extensions.replaceInstruction
-import app.revanced.patcher.patch.PatchOption
-import app.revanced.patcher.patch.PatchOptions
-import app.revanced.patcher.patch.PatchResult
-import app.revanced.patcher.patch.PatchResultSuccess
+import app.revanced.patcher.patch.*
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.annotations.Patch
-import app.revanced.patcher.patch.impl.BytecodePatch
 import app.revanced.patcher.usage.resource.annotation.ExampleResourceCompatibility
+import app.revanced.patcher.usage.resource.patch.ExampleResourcePatch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableField.Companion.toMutable
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
 import com.google.common.collect.ImmutableList
@@ -32,19 +29,24 @@ import org.jf.dexlib2.immutable.reference.ImmutableFieldReference
 import org.jf.dexlib2.immutable.reference.ImmutableStringReference
 import org.jf.dexlib2.immutable.value.ImmutableFieldEncodedValue
 import org.jf.dexlib2.util.Preconditions
+import kotlin.io.path.Path
 
 @Patch
 @Name("example-bytecode-patch")
 @Description("Example demonstration of a bytecode patch.")
 @ExampleResourceCompatibility
 @Version("0.0.1")
-@DependsOn([ExampleBytecodePatch::class])
+@DependsOn([ExampleResourcePatch::class])
 class ExampleBytecodePatch : BytecodePatch(listOf(ExampleFingerprint)) {
     // This function will be executed by the patcher.
     // You can treat it as a constructor
-    override fun execute(data: BytecodeData): PatchResult {
+    override fun execute(context: BytecodeContext): PatchResult {
         // Get the resolved method by its fingerprint from the resolver cache
         val result = ExampleFingerprint.result!!
+
+        // Patch options
+        println(key1)
+        key2 = false
 
         // Get the implementation for the resolved method
         val method = result.mutableMethod
@@ -53,14 +55,14 @@ class ExampleBytecodePatch : BytecodePatch(listOf(ExampleFingerprint)) {
         // Let's modify it, so it prints "Hello, ReVanced! Editing bytecode."
         // Get the start index of our opcode pattern.
         // This will be the index of the instruction with the opcode CONST_STRING.
-        val startIndex = result.patternScanResult!!.startIndex
+        val startIndex = result.scanResult.patternScanResult!!.startIndex
 
         implementation.replaceStringAt(startIndex, "Hello, ReVanced! Editing bytecode.")
 
         // Get the class in which the method matching our fingerprint is defined in.
-        val mainClass = data.findClass {
+        val mainClass = context.findClass {
             it.type == result.classDef.type
-        }!!.resolve()
+        }!!.mutableClass
 
         // Add a new method returning a string
         mainClass.methods.add(
@@ -164,18 +166,37 @@ class ExampleBytecodePatch : BytecodePatch(listOf(ExampleFingerprint)) {
         )
     }
 
-    override val options = PatchOptions(
-        PatchOption.StringOption(
-            "key1", "default", "title", "description", true
-        ),
-        PatchOption.BooleanOption(
-            "key2", true, "title", "description" // required defaults to false
-        ),
-        PatchOption.StringListOption(
-            "key3", "TEST", listOf("TEST", "TEST1", "TEST2"), "title", "description"
-        ),
-        PatchOption.IntListOption(
-            "key4", 1, listOf(1, 2, 3), "title", "description"
-        ),
-    )
+    @Suppress("unused")
+    companion object : OptionsContainer() {
+        private var key1 by option(
+            PatchOption.StringOption(
+                "key1", "default", "title", "description", true
+            )
+        )
+        private var key2 by option(
+            PatchOption.BooleanOption(
+                "key2", true, "title", "description" // required defaults to false
+            )
+        )
+        private var key3 by option(
+            PatchOption.StringListOption(
+                "key3", "TEST", listOf("TEST", "TEST1", "TEST2"), "title", "description"
+            )
+        )
+        private var key4 by option(
+            PatchOption.IntListOption(
+                "key4", 1, listOf(1, 2, 3), "title", "description"
+            )
+        )
+        private var key5 by option(
+            PatchOption.StringOption(
+                "key5", null, "title", "description", true
+            )
+        )
+        private var key6 by option(
+            PatchOption.PathOption(
+                "key6", Path("test.txt"), "title", "description", true
+            )
+        )
+    }
 }

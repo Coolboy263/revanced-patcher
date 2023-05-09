@@ -3,10 +3,12 @@ package app.revanced.patcher.patch
 import app.revanced.patcher.usage.bytecode.ExampleBytecodePatch
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import kotlin.io.path.Path
+import kotlin.io.path.pathString
 import kotlin.test.assertNotEquals
 
 internal class PatchOptionsTest {
-    private val options = ExampleBytecodePatch().options
+    private val options = ExampleBytecodePatch.options
 
     @Test
     fun `should not throw an exception`() {
@@ -15,24 +17,33 @@ internal class PatchOptionsTest {
                 is PatchOption.StringOption -> {
                     option.value = "Hello World"
                 }
+
                 is PatchOption.BooleanOption -> {
                     option.value = false
                 }
+
                 is PatchOption.StringListOption -> {
                     option.value = option.options.first()
                     for (choice in option.options) {
                         println(choice)
                     }
                 }
+
                 is PatchOption.IntListOption -> {
                     option.value = option.options.first()
                     for (choice in option.options) {
                         println(choice)
                     }
                 }
+
+                is PatchOption.PathOption -> {
+                    option.value = Path("test.txt").pathString
+                }
             }
         }
-        val option = options["key1"]
+        val option = options.get<String>("key1")
+        // or: val option: String? by options["key1"]
+        // then you won't need `.value` every time
         println(option.value)
         options["key1"] = "Hello, world!"
         println(option.value)
@@ -40,7 +51,7 @@ internal class PatchOptionsTest {
 
     @Test
     fun `should return a different value when changed`() {
-        var value: String by options["key1"]
+        var value: String? by options["key1"]
         val current = value + "" // force a copy
         value = "Hello, world!"
         assertNotEquals(current, value)
@@ -52,6 +63,9 @@ internal class PatchOptionsTest {
         // > options["key2"] = null
         // is not possible because Kotlin
         // cannot reify the type "Nothing?".
+        // So we have to do this instead:
+        options["key2"] = null as Any?
+        // This is a cleaner replacement for the above:
         options.nullify("key2")
     }
 
@@ -63,9 +77,16 @@ internal class PatchOptionsTest {
     }
 
     @Test
-    fun `should fail because of invalid value type`() {
+    fun `should fail because of invalid value type when setting an option`() {
         assertThrows<InvalidTypeException> {
             options["key1"] = 123
+        }
+    }
+
+    @Test
+    fun `should fail because of invalid value type when getting an option`() {
+        assertThrows<InvalidTypeException> {
+            options.get<Int>("key1")
         }
     }
 
@@ -77,9 +98,16 @@ internal class PatchOptionsTest {
     }
 
     @Test
-    fun `should fail because of the requirement is not met`() {
+    fun `should fail because the requirement is not met`() {
         assertThrows<RequirementNotMetException> {
             options.nullify("key1")
+        }
+    }
+
+    @Test
+    fun `should fail because getting a non-initialized option is illegal`() {
+        assertThrows<RequirementNotMetException> {
+            println(options["key5"].value)
         }
     }
 }

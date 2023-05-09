@@ -1,6 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.7.0"
-    java
+    kotlin("jvm") version "1.8.10"
     `maven-publish`
 }
 
@@ -22,11 +21,12 @@ repositories {
 
 dependencies {
     implementation("xpp3:xpp3:1.1.4c")
-    implementation("org.smali:smali:2.5.2")
-    implementation("app.revanced:multidexlib2:2.5.2.r2")
-    implementation("org.apktool:apktool-lib:2.7.0-SNAPSHOT")
+    implementation("app.revanced:smali:2.5.3-a3836654")
+    implementation("app.revanced:multidexlib2:2.5.3-a3836654")
+    implementation("app.revanced:apktool-lib:2.7.0")
 
-    testImplementation(kotlin("test"))
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.20-RC")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:1.8.20-RC")
 }
 
 tasks {
@@ -36,10 +36,17 @@ tasks {
             events("PASSED", "SKIPPED", "FAILED")
         }
     }
+    processResources {
+        expand("projectVersion" to project.version)
+    }
 }
 
 java {
     withSourcesJar()
+}
+
+kotlin {
+    jvmToolchain(11)
 }
 
 publishing {

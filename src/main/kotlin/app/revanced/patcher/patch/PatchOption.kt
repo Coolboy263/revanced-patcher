@@ -2,6 +2,8 @@
 
 package app.revanced.patcher.patch
 
+import java.nio.file.Path
+import kotlin.io.path.pathString
 import kotlin.reflect.KProperty
 
 class NoSuchOptionException(val option: String) : Exception("No such option: $option")
@@ -9,27 +11,45 @@ class IllegalValueException(val value: Any?) : Exception("Illegal value: $value"
 class InvalidTypeException(val got: String, val expected: String) :
     Exception("Invalid option value type: $got, expected $expected")
 
-class RequirementNotMetException : Exception("null was passed into an option that requires a value")
+object RequirementNotMetException : Exception("null was passed into an option that requires a value")
 
 /**
  * A registry for an array of [PatchOption]s.
  * @param options An array of [PatchOption]s.
  */
-class PatchOptions(vararg val options: PatchOption<*>) : Iterable<PatchOption<*>> {
-    private val register = buildMap {
-        for (option in options) {
-            if (containsKey(option.key)) {
-                throw IllegalStateException("Multiple options found with the same key")
-            }
-            put(option.key, option)
+class PatchOptions(vararg options: PatchOption<*>) : Iterable<PatchOption<*>> {
+    private val register = mutableMapOf<String, PatchOption<*>>()
+
+    init {
+        options.forEach { register(it) }
+    }
+
+    internal fun register(option: PatchOption<*>) {
+        if (register.containsKey(option.key)) {
+            throw IllegalStateException("Multiple options found with the same key")
         }
+        register[option.key] = option
     }
 
     /**
      * Get a [PatchOption] by its key.
      * @param key The key of the [PatchOption].
      */
+    @JvmName("getUntyped")
     operator fun get(key: String) = register[key] ?: throw NoSuchOptionException(key)
+
+    /**
+     * Get a [PatchOption] by its key.
+     * @param key The key of the [PatchOption].
+     */
+    inline operator fun <reified T> get(key: String): PatchOption<T> {
+        val opt = get(key)
+        if (opt.value !is T) throw InvalidTypeException(
+            opt.value?.let { it::class.java.canonicalName } ?: "null",
+            T::class.java.canonicalName
+        )
+        return opt as PatchOption<T>
+    }
 
     /**
      * Set the value of a [PatchOption].
@@ -38,7 +58,7 @@ class PatchOptions(vararg val options: PatchOption<*>) : Iterable<PatchOption<*>
      * Please note that using the wrong value type results in a runtime error.
      */
     inline operator fun <reified T> set(key: String, value: T) {
-        @Suppress("UNCHECKED_CAST") val opt = get(key) as PatchOption<T>
+        val opt = get<T>(key)
         if (opt.value !is T) throw InvalidTypeException(
             T::class.java.canonicalName,
             opt.value?.let { it::class.java.canonicalName } ?: "null"
@@ -54,7 +74,7 @@ class PatchOptions(vararg val options: PatchOption<*>) : Iterable<PatchOption<*>
         get(key).value = null
     }
 
-    override fun iterator() = options.iterator()
+    override fun iterator() = register.values.iterator()
 }
 
 /**
@@ -75,9 +95,15 @@ sealed class PatchOption<T>(
     val validator: (T?) -> Boolean
 ) {
     var value: T? = default
+        get() {
+            if (field == null && required) {
+                throw RequirementNotMetException
+            }
+            return field
+        }
         set(value) {
             if (value == null && required) {
-                throw RequirementNotMetException()
+                throw RequirementNotMetException
             }
             if (!validator(value)) {
                 throw IllegalValueException(value)
@@ -89,18 +115,32 @@ sealed class PatchOption<T>(
      * Gets the value of the option.
      * Please note that using the wrong value type results in a runtime error.
      */
-    operator fun <T> getValue(thisRef: Nothing?, property: KProperty<*>) = value as T
+    @JvmName("getValueTyped")
+    inline operator fun <reified V> getValue(thisRef: Nothing?, property: KProperty<*>): V? {
+        if (value !is V?) throw InvalidTypeException(
+            V::class.java.canonicalName,
+            value?.let { it::class.java.canonicalName } ?: "null"
+        )
+        return value as? V?
+    }
+
+    operator fun getValue(thisRef: Any?, property: KProperty<*>) = value
 
     /**
      * Gets the value of the option.
      * Please note that using the wrong value type results in a runtime error.
      */
-    inline operator fun <reified V> setValue(thisRef: Any?, property: KProperty<*>, new: V) {
+    @JvmName("setValueTyped")
+    inline operator fun <reified V> setValue(thisRef: Nothing?, property: KProperty<*>, new: V) {
         if (value !is V) throw InvalidTypeException(
             V::class.java.canonicalName,
             value?.let { it::class.java.canonicalName } ?: "null"
         )
         value = new as T
+    }
+
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, new: T?) {
+        value = new
     }
 
     /**
@@ -152,8 +192,8 @@ sealed class PatchOption<T>(
         }
     ) {
         init {
-            if (default !in options) {
-                throw IllegalStateException("Default option must be an allowed options")
+            if (default != null && default !in options) {
+                throw IllegalStateException("Default option must be an allowed option")
             }
         }
     }
@@ -188,5 +228,21 @@ sealed class PatchOption<T>(
         validator: (Int?) -> Boolean = { true }
     ) : ListOption<Int>(
         key, default, options, title, description, required, validator
+    )
+
+    /**
+     * A [PatchOption] representing a [Path], backed by a [String].
+     * The validator passes a [String], if you need a [Path] you will have to convert it yourself.
+     * @see PatchOption
+     */
+    class PathOption(
+        key: String,
+        default: Path?,
+        title: String,
+        description: String,
+        required: Boolean = false,
+        validator: (String?) -> Boolean = { true }
+    ) : PatchOption<String>(
+        key, default?.pathString, title, description, required, validator
     )
 }

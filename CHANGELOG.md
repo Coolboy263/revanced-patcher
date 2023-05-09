@@ -1,3 +1,459 @@
+## [7.1.1](https://github.com/revanced/revanced-patcher/compare/v7.1.0...v7.1.1) (2023-05-07)
+
+
+### Bug Fixes
+
+* remove `count` instead of `count + 1` instructions with `removeInstructions` ([#167](https://github.com/revanced/revanced-patcher/issues/167)) ([98f8eed](https://github.com/revanced/revanced-patcher/commit/98f8eedecd72b0afe6a0f099a3641a1cc6be2698))
+
+## [7.1.1-dev.1](https://github.com/revanced/revanced-patcher/compare/v7.1.0...v7.1.1-dev.1) (2023-05-07)
+
+
+### Bug Fixes
+
+* remove `count` instead of `count + 1` instructions with `removeInstructions` ([#167](https://github.com/revanced/revanced-patcher/issues/167)) ([98f8eed](https://github.com/revanced/revanced-patcher/commit/98f8eedecd72b0afe6a0f099a3641a1cc6be2698))
+
+# [7.1.0](https://github.com/revanced/revanced-patcher/compare/v7.0.0...v7.1.0) (2023-05-05)
+
+
+### Features
+
+* add appreciation message for new contributors ([d674362](https://github.com/revanced/revanced-patcher/commit/d67436271ddca9ccfe008272c1ca82c6123ae7ee))
+* add overload to get instruction as type ([49c173d](https://github.com/revanced/revanced-patcher/commit/49c173dc14137ddd198a611e9882dc71300831ee))
+
+# [7.1.0-dev.2](https://github.com/revanced/revanced-patcher/compare/v7.1.0-dev.1...v7.1.0-dev.2) (2023-05-05)
+
+
+### Features
+
+* add overload to get instruction as type ([49c173d](https://github.com/revanced/revanced-patcher/commit/49c173dc14137ddd198a611e9882dc71300831ee))
+
+# [7.1.0-dev.1](https://github.com/revanced/revanced-patcher/compare/v7.0.0...v7.1.0-dev.1) (2023-04-30)
+
+
+### Features
+
+* add appreciation message for new contributors ([d674362](https://github.com/revanced/revanced-patcher/commit/d67436271ddca9ccfe008272c1ca82c6123ae7ee))
+
+# [7.0.0](https://github.com/revanced/revanced-patcher/compare/v6.4.3...v7.0.0) (2023-02-26)
+
+
+* feat!: merge integrations only when necessary ([6e24a85](https://github.com/revanced/revanced-patcher/commit/6e24a85eabd1e7a1484fad229d5ba55c3ba1f1b4))
+
+
+### BREAKING CHANGES
+
+* `Patcher.addFiles` is now renamed to `Patcher.addIntegrations`
+
+Signed-off-by: oSumAtrIX <johan.melkonyan1@web.de>
+
+# [7.0.0-dev.1](https://github.com/revanced/revanced-patcher/compare/v6.4.3...v7.0.0-dev.1) (2023-02-26)
+
+
+* feat!: merge integrations only when necessary ([6e24a85](https://github.com/revanced/revanced-patcher/commit/6e24a85eabd1e7a1484fad229d5ba55c3ba1f1b4))
+
+
+### BREAKING CHANGES
+
+* `Patcher.addFiles` is now renamed to `Patcher.addIntegrations`
+
+Signed-off-by: oSumAtrIX <johan.melkonyan1@web.de>
+
+## [6.4.3](https://github.com/revanced/revanced-patcher/compare/v6.4.2...v6.4.3) (2023-02-10)
+
+
+### Bug Fixes
+
+* check `CONST_STRING_JUMP` instructions for matching string ([058d292](https://github.com/revanced/revanced-patcher/commit/058d292ad5e297f4c652ff543c13e77a39f7fb1b))
+
+## [6.4.3-dev.1](https://github.com/revanced/revanced-patcher/compare/v6.4.2...v6.4.3-dev.1) (2023-02-10)
+
+
+### Bug Fixes
+
+* check `CONST_STRING_JUMP` instructions for matching string ([058d292](https://github.com/revanced/revanced-patcher/commit/058d292ad5e297f4c652ff543c13e77a39f7fb1b))
+
+## [6.4.2](https://github.com/revanced/revanced-patcher/compare/v6.4.1...v6.4.2) (2023-01-17)
+
+
+### Bug Fixes
+
+* resolve failing builds ([a263fdf](https://github.com/revanced/revanced-patcher/commit/a263fdfd413fc05098e28d4800e36ce7d313085b))
+
+## [6.4.2-dev.1](https://github.com/revanced/revanced-patcher/compare/v6.4.1...v6.4.2-dev.1) (2023-01-17)
+
+
+### Bug Fixes
+
+* resolve failing builds ([a263fdf](https://github.com/revanced/revanced-patcher/commit/a263fdfd413fc05098e28d4800e36ce7d313085b))
+
+## [6.4.1](https://github.com/revanced/revanced-patcher/compare/v6.4.0...v6.4.1) (2023-01-15)
+
+
+### Bug Fixes
+
+* update dependency `app.revanced:multidexlib2` ([#150](https://github.com/revanced/revanced-patcher/issues/150)) ([dd7dd38](https://github.com/revanced/revanced-patcher/commit/dd7dd383577dcfc95e97f77b446a89b41b589dc0))
+
+## [6.4.1](https://github.com/revanced/revanced-patcher/compare/v6.4.0...v6.4.1) (2023-01-15)
+
+
+### Bug Fixes
+
+* update dependency `app.revanced:multidexlib2` ([#150](https://github.com/revanced/revanced-patcher/issues/150)) ([dd7dd38](https://github.com/revanced/revanced-patcher/commit/dd7dd383577dcfc95e97f77b446a89b41b589dc0))
+
+## [6.4.1-dev.1](https://github.com/revanced/revanced-patcher/compare/v6.4.0...v6.4.1-dev.1) (2023-01-15)
+
+
+### Bug Fixes
+
+* update dependency `app.revanced:multidexlib2` ([#150](https://github.com/revanced/revanced-patcher/issues/150)) ([dd7dd38](https://github.com/revanced/revanced-patcher/commit/dd7dd383577dcfc95e97f77b446a89b41b589dc0))
+
+# [6.4.0](https://github.com/revanced/revanced-patcher/compare/v6.3.2...v6.4.0) (2023-01-02)
+
+
+### Features
+
+* add missing setter to `MutableMethod` ([8f3ecc3](https://github.com/revanced/revanced-patcher/commit/8f3ecc318c39f0270aff53efdee7a1c8d82af421))
+* do not fix methods or methods in class merger ([4102f43](https://github.com/revanced/revanced-patcher/commit/4102f43b8a9473fd0ee96c5d4fb8f6e9b4e30e70))
+* fix method and field access when merging classes ([5c09ef7](https://github.com/revanced/revanced-patcher/commit/5c09ef7837f9b731e137b66c19da77f63c007595))
+* make `aaptPath` nullable ([#146](https://github.com/revanced/revanced-patcher/issues/146)) ([9f0a09a](https://github.com/revanced/revanced-patcher/commit/9f0a09a7569fd5dd78afa27cb66a73d1662edc69))
+
+# [6.4.0-dev.2](https://github.com/revanced/revanced-patcher/compare/v6.4.0-dev.1...v6.4.0-dev.2) (2023-01-02)
+
+
+### Features
+
+* add missing setter to `MutableMethod` ([8f3ecc3](https://github.com/revanced/revanced-patcher/commit/8f3ecc318c39f0270aff53efdee7a1c8d82af421))
+* do not fix methods or methods in class merger ([4102f43](https://github.com/revanced/revanced-patcher/commit/4102f43b8a9473fd0ee96c5d4fb8f6e9b4e30e70))
+* fix method and field access when merging classes ([5c09ef7](https://github.com/revanced/revanced-patcher/commit/5c09ef7837f9b731e137b66c19da77f63c007595))
+
+# [6.4.0-dev.1](https://github.com/revanced/revanced-patcher/compare/v6.3.2...v6.4.0-dev.1) (2022-12-20)
+
+
+### Features
+
+* make `aaptPath` nullable ([#146](https://github.com/revanced/revanced-patcher/issues/146)) ([9f0a09a](https://github.com/revanced/revanced-patcher/commit/9f0a09a7569fd5dd78afa27cb66a73d1662edc69))
+
+## [6.3.2](https://github.com/revanced/revanced-patcher/compare/v6.3.1...v6.3.2) (2022-12-18)
+
+
+### Bug Fixes
+
+* check if fingerprint string is substring of any string references ([c5de9e2](https://github.com/revanced/revanced-patcher/commit/c5de9e29889dffd18b31e62a892881cc48e8b607))
+* print full exception when patch fails ([7cf79e6](https://github.com/revanced/revanced-patcher/commit/7cf79e68e0e9dfd9faddee33139b127b71882d3e))
+
+## [6.3.2-dev.1](https://github.com/revanced/revanced-patcher/compare/v6.3.1...v6.3.2-dev.1) (2022-12-18)
+
+
+### Bug Fixes
+
+* check if fingerprint string is substring of any string references ([c5de9e2](https://github.com/revanced/revanced-patcher/commit/c5de9e29889dffd18b31e62a892881cc48e8b607))
+* print full exception when patch fails ([7cf79e6](https://github.com/revanced/revanced-patcher/commit/7cf79e68e0e9dfd9faddee33139b127b71882d3e))
+
+## [6.3.2-dev.1](https://github.com/revanced/revanced-patcher/compare/v6.3.1...v6.3.2-dev.1) (2022-12-17)
+
+
+### Bug Fixes
+
+* print full exception when patch fails ([27a8401](https://github.com/revanced/revanced-patcher/commit/27a8401d81e078e0303f7ddcb0ac6f342f8e4def))
+
+## [6.3.1](https://github.com/revanced/revanced-patcher/compare/v6.3.0...v6.3.1) (2022-12-13)
+
+
+### Bug Fixes
+
+* publicize types when merging files if necessary ([#137](https://github.com/revanced/revanced-patcher/issues/137)) ([9ec720e](https://github.com/revanced/revanced-patcher/commit/9ec720e983785d8b1dde330cc0e0e0f914c1803c))
+
+## [6.3.1-dev.1](https://github.com/revanced/revanced-patcher/compare/v6.3.0...v6.3.1-dev.1) (2022-12-13)
+
+
+### Bug Fixes
+
+* publicize types when merging files if necessary ([#137](https://github.com/revanced/revanced-patcher/issues/137)) ([9ec720e](https://github.com/revanced/revanced-patcher/commit/9ec720e983785d8b1dde330cc0e0e0f914c1803c))
+
+# [6.3.0](https://github.com/revanced/revanced-patcher/compare/v6.2.0...v6.3.0) (2022-12-02)
+
+
+### Features
+
+* sort patches in lexicographical order ([a306561](https://github.com/revanced/revanced-patcher/commit/a306561b55ac848792046378f582a036f7ffab03)), closes [#125](https://github.com/revanced/revanced-patcher/issues/125)
+
+# [6.2.0](https://github.com/revanced/revanced-patcher/compare/v6.1.1...v6.2.0) (2022-12-02)
+
+
+### Features
+
+* merge classes on addition ([#127](https://github.com/revanced/revanced-patcher/issues/127)) ([a925650](https://github.com/revanced/revanced-patcher/commit/a9256500440f9b4117f1b8813ba0097dafee4ebb))
+
+## [6.1.1](https://github.com/revanced/revanced-patcher/compare/v6.1.0...v6.1.1) (2022-11-25)
+
+
+### Bug Fixes
+
+* use `MethodUtil.methodSignaturesMatch` instead of `Method.softCompareTo` ([bd053b7](https://github.com/revanced/revanced-patcher/commit/bd053b7e9974c0282d56e6762459db7070452e4a))
+
+# [6.1.0](https://github.com/revanced/revanced-patcher/compare/v6.0.2...v6.1.0) (2022-11-22)
+
+
+### Features
+
+* apply changes from ReVanced Patcher ([ba9d998](https://github.com/revanced/revanced-patcher/commit/ba9d99868103406fe36b9aa0cfaa0ed5023edfab))
+
+## [6.0.2](https://github.com/revanced/revanced-patcher/compare/v6.0.1...v6.0.2) (2022-11-18)
+
+
+### Bug Fixes
+
+* fallback to patch class name instead of `java.lang.Class` class name ([4164cb0](https://github.com/revanced/revanced-patcher/commit/4164cb0deacc7e1eed9fce63dab030180f28b762))
+
+## [6.0.1](https://github.com/revanced/revanced-patcher/compare/v6.0.0...v6.0.1) (2022-11-14)
+
+
+### Bug Fixes
+
+* remove unnecessary dummy nop instructions ([#111](https://github.com/revanced/revanced-patcher/issues/111)) ([f9bc95f](https://github.com/revanced/revanced-patcher/commit/f9bc95f220aa434308ce6950ba6ad2e7efac9c8a))
+
+# [6.0.0](https://github.com/revanced/revanced-patcher/compare/v5.1.2...v6.0.0) (2022-10-05)
+
+
+### Code Refactoring
+
+* improve structuring of classes and their implementations ([4aa14bb](https://github.com/revanced/revanced-patcher/commit/4aa14bbb858af9253eae9328b759f3298b65a215))
+
+
+### Features
+
+* remove unused annotation `DirectPatternScanMethod` ([538b2a8](https://github.com/revanced/revanced-patcher/commit/538b2a859962570c700362afc88704ed3611aa87))
+* remove unused annotation `SincePatcher` ([4ae9ad0](https://github.com/revanced/revanced-patcher/commit/4ae9ad09d64a3f69512ccb037f816cb847d7350f))
+* remove unused extension `dependsOn` ([797286b](https://github.com/revanced/revanced-patcher/commit/797286b7588646272dea2fd35e8e78b0ffb18a0f))
+* remove unused patch extensions ([5583904](https://github.com/revanced/revanced-patcher/commit/55839049948033ad02414517fd3ba03619216aec))
+
+
+### BREAKING CHANGES
+
+* various changes in which packages classes previously where and their implementation
+* These extensions do not exist anymore and any use should be removed
+* The extension does not exist anymore and any use should be removed
+* The annotation does not exist anymore and any use should be removed
+
+## [5.1.2](https://github.com/revanced/revanced-patcher/compare/v5.1.1...v5.1.2) (2022-09-29)
+
+
+### Bug Fixes
+
+* check dependencies for resource patches ([9c07ffc](https://github.com/revanced/revanced-patcher/commit/9c07ffcc7af9f088426528561f4321c5cc6b5b15))
+* use instruction index instead of strings list index for `StringMatch` ([843e62a](https://github.com/revanced/revanced-patcher/commit/843e62ad290ee0a707be9322ee943921da3ea420))
+
+## [5.1.1](https://github.com/revanced/revanced-patcher/compare/v5.1.0...v5.1.1) (2022-09-26)
+
+
+### Performance Improvements
+
+* decode resources only when necessary ([3ba4be2](https://github.com/revanced/revanced-patcher/commit/3ba4be240bf0a424e4bbfbaca9605644fda0984e))
+
+# [5.1.0](https://github.com/revanced/revanced-patcher/compare/v5.0.1...v5.1.0) (2022-09-26)
+
+
+### Features
+
+* RwLock for opening files in `DomFileEditor` ([db4348c](https://github.com/revanced/revanced-patcher/commit/db4348c4faf51bfe29678baacfbe76ba645ec0b9))
+
+## [5.0.1](https://github.com/revanced/revanced-patcher/compare/v5.0.0...v5.0.1) (2022-09-23)
+
+
+### Reverts
+
+* revert breaking changes ([#106](https://github.com/revanced/revanced-patcher/issues/106)) ([124332f](https://github.com/revanced/revanced-patcher/commit/124332f0e9bbdaf4f1aeeb6a31333093eeba1642))
+
+# [5.0.0](https://github.com/revanced/revanced-patcher/compare/v4.5.0...v5.0.0) (2022-09-21)
+
+
+### Bug Fixes
+
+* **tests:** access `patternScanResult` through `scanResult` ([76676fb](https://github.com/revanced/revanced-patcher/commit/76676fb5673a9e92517ee3a13943cdc98dd5102a))
+
+
+* refactor!: move utility methods from `MethodFingerprintUtils` `MethodFingerprint` ([d802ef8](https://github.com/revanced/revanced-patcher/commit/d802ef844edf65d4d26328d6ca72e3ddd5a52b15))
+* feat(fingerprint)!: `StringsScanResult` for `MethodFingerprint` ([3813e28](https://github.com/revanced/revanced-patcher/commit/3813e28ac2ad6710d8d935526ca679e7b1b5980e))
+
+
+### BREAKING CHANGES
+
+* Imports will have to be updated from `MethodFingerprintUtils` to `MethodFingerprint.Companion`.
+
+Signed-off-by: oSumAtrIX <johan.melkonyan1@web.de>
+* `MethodFingerprint` now has a field for `MethodFingerprintScanResult`. `MethodFingerprintScanResult` now holds the previous field `MethodFingerprint.patternScanResult`.
+
+Signed-off-by: oSumAtrIX <johan.melkonyan1@web.de>
+
+# [4.5.0](https://github.com/revanced/revanced-patcher/compare/v4.4.2...v4.5.0) (2022-09-20)
+
+
+### Features
+
+* section `acknowledgements` for issue templates ([a0cb449](https://github.com/revanced/revanced-patcher/commit/a0cb449c60310917141e2809abaa16b4174dc002))
+
+## [4.4.2](https://github.com/revanced/revanced-patcher/compare/v4.4.1...v4.4.2) (2022-09-18)
+
+
+### Bug Fixes
+
+* **fingerprint:** do not throw on `MethodFingerprint.result` getter ([2f7e62e](https://github.com/revanced/revanced-patcher/commit/2f7e62ef65422f2c75ef8b09b9cd27076e172b30))
+
+
+### Performance Improvements
+
+* **fingerprint:** do not resolve already resolved fingerprints ([4bfd7eb](https://github.com/revanced/revanced-patcher/commit/4bfd7ebff8b6623b0da4a46d6048bed08c5070d4))
+
+## [4.4.1](https://github.com/revanced/revanced-patcher/compare/v4.4.0...v4.4.1) (2022-09-14)
+
+
+### Bug Fixes
+
+* compare any methods parameters ([#101](https://github.com/revanced/revanced-patcher/issues/101)) ([085a3a4](https://github.com/revanced/revanced-patcher/commit/085a3a479d7bd411dcb0492b283daca538c824a1))
+
+# [4.4.0](https://github.com/revanced/revanced-patcher/compare/v4.3.0...v4.4.0) (2022-09-09)
+
+
+### Features
+
+* add PathOption back ([172655b](https://github.com/revanced/revanced-patcher/commit/172655bde06efdb0955431b44d269e6a64fe317a))
+
+# [4.3.0](https://github.com/revanced/revanced-patcher/compare/v4.2.3...v4.3.0) (2022-09-09)
+
+
+### Features
+
+* improved Patch Options ([e722e3f](https://github.com/revanced/revanced-patcher/commit/e722e3f4f9dc64acf53595802a0a83cf46ee96b8))
+
+## [4.2.3](https://github.com/revanced/revanced-patcher/compare/v4.2.2...v4.2.3) (2022-09-08)
+
+
+### Bug Fixes
+
+* wrong value for iterator in PatchOptions ([e31ac1f](https://github.com/revanced/revanced-patcher/commit/e31ac1f132df56ba7d2f8446d289ae03ef28f67d))
+
+## [4.2.2](https://github.com/revanced/revanced-patcher/compare/v4.2.1...v4.2.2) (2022-09-08)
+
+
+### Bug Fixes
+
+* invalid type propagation in options ([b873228](https://github.com/revanced/revanced-patcher/commit/b873228ef0a9e6e431a4278c979caa5fcc508e0d)), closes [#98](https://github.com/revanced/revanced-patcher/issues/98)
+
+## [4.2.1](https://github.com/revanced/revanced-patcher/compare/v4.2.0...v4.2.1) (2022-09-08)
+
+
+### Bug Fixes
+
+* make patcher version public ([76c45dd](https://github.com/revanced/revanced-patcher/commit/76c45dd7c1ffdca57e30ae7109c9fe0e5768f877))
+
+# [4.2.0](https://github.com/revanced/revanced-patcher/compare/v4.1.5...v4.2.0) (2022-09-08)
+
+
+### Bug Fixes
+
+* remove repeatable from PatchDeprecated ([6e73631](https://github.com/revanced/revanced-patcher/commit/6e73631d4d21e5e862f07ed7517244f36394e5ca))
+
+
+### Features
+
+* SincePatcher annotation ([25f74dc](https://github.com/revanced/revanced-patcher/commit/25f74dc5e9ed1a09258345b920d4f5a0dd7da527))
+
+## [4.1.5](https://github.com/revanced/revanced-patcher/compare/v4.1.4...v4.1.5) (2022-09-08)
+
+
+### Bug Fixes
+
+* broken deprecation message ([62aa295](https://github.com/revanced/revanced-patcher/commit/62aa295e7372014238415af36d902a4e88e2acbc))
+
+## [4.1.4](https://github.com/revanced/revanced-patcher/compare/v4.1.3...v4.1.4) (2022-09-08)
+
+
+### Bug Fixes
+
+* handle option types and nulls properly ([aff4968](https://github.com/revanced/revanced-patcher/commit/aff4968e6f67239afa3b5c02cc133a17d9c3cbeb))
+
+## [4.1.3](https://github.com/revanced/revanced-patcher/compare/v4.1.2...v4.1.3) (2022-09-07)
+
+
+### Bug Fixes
+
+* only run list option check if not null ([4055939](https://github.com/revanced/revanced-patcher/commit/4055939c089e3c396c308c980215d93a1dea5954))
+
+## [4.1.2](https://github.com/revanced/revanced-patcher/compare/v4.1.1...v4.1.2) (2022-09-07)
+
+
+### Bug Fixes
+
+* invalid types for example options ([79f91e0](https://github.com/revanced/revanced-patcher/commit/79f91e0e5a6d99828f30aae55339ce0d897394c7))
+
+## [4.1.1](https://github.com/revanced/revanced-patcher/compare/v4.1.0...v4.1.1) (2022-09-07)
+
+
+### Bug Fixes
+
+* handle private companion objects ([ad3d332](https://github.com/revanced/revanced-patcher/commit/ad3d332e27d07e9d074bbaaf51af7eb2f9bfc7d5))
+
+# [4.1.0](https://github.com/revanced/revanced-patcher/compare/v4.0.0...v4.1.0) (2022-09-07)
+
+
+### Features
+
+* deprecation for patches ([80c2e80](https://github.com/revanced/revanced-patcher/commit/80c2e809251cdb04d2dd3b3bfdbb8844bdfa31fa))
+
+# [4.0.0](https://github.com/revanced/revanced-patcher/compare/v3.5.1...v4.0.0) (2022-09-07)
+
+
+### Code Refactoring
+
+* Improve Patch Options ([6b909c1](https://github.com/revanced/revanced-patcher/commit/6b909c1ee6b8c2ea08bbca059df755e2e5f31656))
+
+
+### BREAKING CHANGES
+
+* Options has been moved from Patch to a new interface called OptionsContainer and are now handled entirely different. Make sure to check the examples to understand how it works.
+
+## [3.5.1](https://github.com/revanced/revanced-patcher/compare/v3.5.0...v3.5.1) (2022-09-06)
+
+
+### Bug Fixes
+
+* add tests for PathOption ([d6308e1](https://github.com/revanced/revanced-patcher/commit/d6308e126c6217b098192c51b6e98bc85a8656bd))
+* PathOption should be open, not sealed ([a562e47](https://github.com/revanced/revanced-patcher/commit/a562e476c085841efbc7ee98b01d8e6bb18ed757))
+* typo in ListOption ([3921648](https://github.com/revanced/revanced-patcher/commit/392164862c83d6e76b2a2113d6f6d59fef0020d1))
+
+
+### Performance Improvements
+
+* make exception an object ([75d2be8](https://github.com/revanced/revanced-patcher/commit/75d2be88037c9cf5436ab69d92abea575409a865))
+
+# [3.5.0](https://github.com/revanced/revanced-patcher/compare/v3.4.1...v3.5.0) (2022-09-05)
+
+
+### Features
+
+* default value for `Package.versions` annotation parameter ([131dedd](https://github.com/revanced/revanced-patcher/commit/131dedd4b021fe1c3b0be49ccba4764b325770ea))
+
+## [3.4.1](https://github.com/revanced/revanced-patcher/compare/v3.4.0...v3.4.1) (2022-09-03)
+
+
+### Bug Fixes
+
+* remove default param from Package.versions ([4b81318](https://github.com/revanced/revanced-patcher/commit/4b813187107e85dc267dbc2d353884b2cc671cc4))
+
+# [3.4.0](https://github.com/revanced/revanced-patcher/compare/v3.3.3...v3.4.0) (2022-08-31)
+
+
+### Features
+
+* nullable parameters ([7882a8d](https://github.com/revanced/revanced-patcher/commit/7882a8d928cad8de8cfea711947fc02659549d20))
+
+## [3.3.3](https://github.com/revanced/revanced-patcher/compare/v3.3.2...v3.3.3) (2022-08-14)
+
+
+### Bug Fixes
+
+* show error message if cause is null ([f9da2ad](https://github.com/revanced/revanced-patcher/commit/f9da2ad531644617ad5a2cc6a1819d530e18ba22))
+
 ## [3.3.2](https://github.com/revanced/revanced-patcher/compare/v3.3.1...v3.3.2) (2022-08-06)
 
 
